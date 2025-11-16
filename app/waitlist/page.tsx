@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 
 export default function WaitlistPage() {
+  const router = useRouter();
   const [isMobile, setIsMobile] = React.useState(false);
   const [submitted, setSubmitted] = React.useState(false);
   const [typedText, setTypedText] = React.useState('');
@@ -12,6 +14,13 @@ export default function WaitlistPage() {
   const [email, setEmail] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
+
+  // Handle click to go back home when on thanks screen
+  const handleThanksClick = () => {
+    if (submitted) {
+      router.push('/');
+    }
+  };
 
   // Handle form submission
   const handleSubmit = async () => {
@@ -111,7 +120,8 @@ export default function WaitlistPage() {
 
   return (
     <div 
-      className={`relative overflow-hidden bg-[#040509] ${isMobile ? 'w-full min-h-screen' : 'w-screen h-screen'}`}
+      className={`relative overflow-hidden bg-[#040509] ${isMobile ? 'w-full min-h-screen' : 'w-screen h-screen'} ${submitted ? 'cursor-pointer' : ''}`}
+      onClick={handleThanksClick}
     >
       {/* Background texture layers */}
       <motion.div 
