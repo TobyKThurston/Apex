@@ -1,8 +1,37 @@
+/**
+ * Apex Terminal - Dashboard Data Module
+ * 
+ * This module handles fetching and processing prediction market data from the Dome API.
+ * It transforms raw API responses into a format suitable for display in the dashboard UI.
+ * 
+ * Key Concepts:
+ * - Async/Await: Used for handling asynchronous API calls
+ * - TypeScript: Provides type safety for all data structures
+ * - Error Handling: Graceful fallbacks when API calls fail
+ * - Data Transformation: Converts API data to UI-friendly format
+ */
+
 import { domeClient } from "./dome";
 import type { DashboardData, MarketRow, SignalEvent, Venue, SmartSide, SignalTag, SharpWalletPosition } from "./types";
 
 /**
- * Fetches dashboard data from Dome API and transforms it into the format needed by the UI
+ * Main function to fetch and process dashboard data
+ * 
+ * This is an async function (returns a Promise) because API calls take time.
+ * The function:
+ * 1. Fetches markets from Polymarket via Dome API
+ * 2. Fetches real-time prices for each market
+ * 3. Computes analytics (sharp alignment, smart side, etc.)
+ * 4. Filters out markets without valid prices
+ * 5. Returns formatted data for the UI
+ * 
+ * @returns Promise<DashboardData> - Object containing markets array and signal events
+ * 
+ * Example usage:
+ * ```typescript
+ * const data = await getDashboardData();
+ * console.log(data.markets); // Array of market objects
+ * ```
  */
 export async function getDashboardData(): Promise<DashboardData> {
   try {
