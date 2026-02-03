@@ -1,7 +1,22 @@
 {
   "name": "apex-terminal",
   "version": "0.1.0",
+  "description": "Real-time prediction market analytics powered by sharp wallet intelligence",
   "private": true,
+  "author": "Your Name",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/apex-terminal.git"
+  },
+  "keywords": [
+    "prediction-markets",
+    "polymarket",
+    "analytics",
+    "dashboard",
+    "nextjs",
+    "typescript"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +24,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@dome-api/sdk": "^0.0.7",
     "@supabase/supabase-js": "^2.81.1",
     "motion": "^12.23.24",
     "next": "16.0.3",
